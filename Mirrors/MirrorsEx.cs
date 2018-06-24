@@ -15,6 +15,11 @@ namespace Mirrors
     public static class MirrorsEx
     {
         /// <summary>
+        /// Default flags to use for instance-related actions.
+        /// </summary>
+        public static BindingFlags DefaultInstanceFlags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic;
+
+        /// <summary>
         /// Set a property value from name.
         /// </summary>
         /// <param name="obj">Object to set value to.</param>
@@ -24,7 +29,7 @@ namespace Mirrors
         public static void SetProperty(object obj, string fieldName, object value, bool ignoreCase = false)
         {
             // set flags
-            var flags = BindingFlags.Public | BindingFlags.Instance;
+            var flags = DefaultInstanceFlags;
             if (ignoreCase) flags |= BindingFlags.IgnoreCase;
 
             // get property
@@ -59,7 +64,7 @@ namespace Mirrors
         public static T GetProperty<T>(object obj, string fieldName, bool ignoreCase = false)
         {
             // set flags
-            var flags = BindingFlags.Public | BindingFlags.Instance;
+            var flags = DefaultInstanceFlags;
             if (ignoreCase) flags |= BindingFlags.IgnoreCase;
 
             // get property
@@ -99,7 +104,7 @@ namespace Mirrors
         public static void SetField(object obj, string fieldName, object value, bool ignoreCase = false)
         {
             // set flags
-            var flags = BindingFlags.Public | BindingFlags.Instance;
+            var flags = DefaultInstanceFlags;
             if (ignoreCase) flags |= BindingFlags.IgnoreCase;
 
             // get field
@@ -130,7 +135,7 @@ namespace Mirrors
         public static T GetField<T>(object obj, string fieldName, bool ignoreCase = false)
         {
             // set flags
-            var flags = BindingFlags.Public | BindingFlags.Instance;
+            var flags = DefaultInstanceFlags;
             if (ignoreCase) flags |= BindingFlags.IgnoreCase;
 
             // get field

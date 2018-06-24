@@ -36,6 +36,12 @@ namespace MirrorsUnitTests
                 int gotVal = Mirrors.Mirrors.GetValue<int>(test, "int_property_r");
                 Assert.AreEqual(gotVal, test.int_property_r);
             }
+
+            // test getting private field
+            {
+                int gotVal = Mirrors.Mirrors.GetValue<int>(test, "int_private_field");
+                Assert.AreEqual(gotVal, test.int_private_field__val);
+            }
         }
 
         /// <summary>

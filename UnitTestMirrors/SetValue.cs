@@ -36,6 +36,12 @@ namespace MirrorsUnitTests
                 Mirrors.Mirrors.SetValue(test, "int_property_w", 999);
                 Assert.AreEqual(999, test.int_property_rw);
             }
+
+            // test setting private field
+            {
+                Mirrors.Mirrors.SetValue(test, "int_private_field", 999);
+                Assert.AreEqual(999, test.int_private_field__val);
+            }
         }
 
         /// <summary>
