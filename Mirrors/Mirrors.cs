@@ -21,16 +21,41 @@ namespace Mirrors
         /// <param name="fieldName">Property / field identifier.</param>
         /// <param name="value">Value to set.</param>
         /// <param name="ignoreCase">If true, field name will not be case-sensitive.</param>
-        public static void SetValue(object obj, string fieldName, object value, bool ignoreCase = false)
+        /// <param name="fromString">If true, will convert value from string.</param>
+        private static void SetValue(object obj, string fieldName, object value, bool ignoreCase = false, bool fromString = false)
         {
             try
             {
-                MirrorsEx.SetProperty(obj, fieldName, value, ignoreCase);
+                MirrorsEx.SetProperty(obj, fieldName, value, ignoreCase, fromString);
             }
             catch (FieldNotFoundException)
             {
-                MirrorsEx.SetField(obj, fieldName, value, ignoreCase);
+                MirrorsEx.SetField(obj, fieldName, value, ignoreCase, fromString);
             }
+        }
+
+        /// <summary>
+        /// Set field / property value by name.
+        /// </summary>
+        /// <param name="obj">Object to set value to.</param>
+        /// <param name="fieldName">Property / field identifier.</param>
+        /// <param name="value">Value to set.</param>
+        /// <param name="ignoreCase">If true, field name will not be case-sensitive.</param>
+        public static void SetValue(object obj, string fieldName, object value, bool ignoreCase = false)
+        {
+            SetValue(obj, fieldName, value, ignoreCase, false);
+        }
+
+        /// <summary>
+        /// Set field / property value by name.
+        /// </summary>
+        /// <param name="obj">Object to set value to.</param>
+        /// <param name="fieldName">Property / field identifier.</param>
+        /// <param name="value">Value to set.</param>
+        /// <param name="ignoreCase">If true, field name will not be case-sensitive.</param>
+        public static void SetValueFromString(object obj, string fieldName, object value, bool ignoreCase = false)
+        {
+            SetValue(obj, fieldName, value, ignoreCase, true);
         }
 
         /// <summary>

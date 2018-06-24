@@ -117,6 +117,57 @@ namespace MirrorsUnitTests
         }
 
         /// <summary>
+        /// Test setting value from string.
+        /// </summary>
+        [TestMethod]
+        public void SetValueFromString()
+        {
+            // create test object
+            TestObj test = new TestObj();
+
+            // test setting field with wrong type
+            {    
+                Mirrors.Mirrors.SetValueFromString(test, "int_field", "123");
+                Assert.AreEqual(test.int_field, 123);
+            }
+
+            // test setting field from invalid string
+            {
+                try
+                {
+                    Mirrors.Mirrors.SetValueFromString(test, "int_field", "bla");
+                    Assert.Fail("Didn't get BadStringFormat exception!");
+                }
+                catch (Mirrors.BadStringFormatException)
+                {
+                    Assert.IsTrue(true);
+                }
+                catch (Exception e)
+                {
+                    Assert.Fail("Got wrong exception type! Expected BadStringFormat exception.");
+                }
+            }
+
+            // test setting field that don't support converting.
+            {
+                try
+                {
+                    Mirrors.Mirrors.SetValueFromString(test, "self_field", "bla");
+                    Assert.Fail("Didn't get MissingConverter exception!");
+                }
+                catch (Mirrors.BadStringFormatException)
+                {
+                    Assert.IsTrue(true);
+                }
+                catch (Exception e)
+                {
+                    Assert.Fail("Got wrong exception type! Expected MissingConverter exception.");
+                }
+            }
+
+        }
+
+        /// <summary>
         /// Test what happens if we try to set wrong type (we should get an exception).
         /// </summary>
         [TestMethod]

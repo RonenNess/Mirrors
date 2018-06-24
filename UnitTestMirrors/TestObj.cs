@@ -41,5 +41,10 @@ namespace MirrorsUnitTests
         /// Provide access to the value in 'int_private_field'.
         /// </summary>
         public int int_private_field__val { get { return int_private_field; } }
+
+        /// <summary>
+        /// Field of type self.
+        /// </summary>
+        public TestObj self_field;
     }
 }

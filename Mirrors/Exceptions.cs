@@ -134,4 +134,68 @@ namespace Mirrors
         {
         }
     }
+
+    /// <summary>
+    /// Tried to convert string of bad format.
+    /// </summary>
+    public class BadStringFormatException : Exception
+    {
+        /// <summary>
+        /// Create exception.
+        /// </summary>
+        public BadStringFormatException()
+        {
+        }
+
+        /// <summary>
+        /// Create exception with message.
+        /// </summary>
+        /// <param name="message">Message string.</param>
+        public BadStringFormatException(string message)
+            : base(message)
+        {
+        }
+
+        /// <summary>
+        /// Create exception with message and inner exception.
+        /// </summary>
+        /// <param name="message">Message string.</param>
+        /// <param name="inner">Inner exception</param>
+        public BadStringFormatException(string message, Exception inner)
+            : base(message, inner)
+        {
+        }
+    }
+
+    /// <summary>
+    /// Field does not support convertion.
+    /// </summary>
+    public class MissingConverterException : Exception
+    {
+        /// <summary>
+        /// Create exception.
+        /// </summary>
+        public MissingConverterException()
+        {
+        }
+
+        /// <summary>
+        /// Create exception with message.
+        /// </summary>
+        /// <param name="message">Message string.</param>
+        public MissingConverterException(string message)
+            : base(message)
+        {
+        }
+
+        /// <summary>
+        /// Create exception with message and inner exception.
+        /// </summary>
+        /// <param name="message">Message string.</param>
+        /// <param name="inner">Inner exception</param>
+        public MissingConverterException(string message, Exception inner)
+            : base(message, inner)
+        {
+        }
+    }
 }

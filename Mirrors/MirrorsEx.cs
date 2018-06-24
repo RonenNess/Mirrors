@@ -26,7 +26,8 @@ namespace Mirrors
         /// <param name="fieldName">Property identifier.</param>
         /// <param name="value">Value to set.</param>
         /// <param name="ignoreCase">If true, field name will not be case-sensitive.</param>
-        public static void SetProperty(object obj, string fieldName, object value, bool ignoreCase = false)
+        /// <param name="castFromStr">If true, will cast value from string to property type.</param>
+        public static void SetProperty(object obj, string fieldName, object value, bool ignoreCase = false, bool castFromStr = false)
         {
             // set flags
             var flags = DefaultInstanceFlags;
@@ -46,7 +47,7 @@ namespace Mirrors
             // set value
             try
             {
-                prop.SetValue(obj, value, null);
+                prop.SetValue(obj, castFromStr ? FromString(prop, value.ToString()) : value, null);
             }
             catch (ArgumentException e)
             {
@@ -101,7 +102,8 @@ namespace Mirrors
         /// <param name="fieldName">Field identifier.</param>
         /// <param name="value">Value to set.</param>
         /// <param name="ignoreCase">If true, field name will not be case-sensitive.</param>
-        public static void SetField(object obj, string fieldName, object value, bool ignoreCase = false)
+        /// <param name="castFromStr">If true, will cast value from string to property type.</param>
+        public static void SetField(object obj, string fieldName, object value, bool ignoreCase = false, bool castFromStr = false)
         {
             // set flags
             var flags = DefaultInstanceFlags;
@@ -116,14 +118,14 @@ namespace Mirrors
 
             // set value
             try
-            { 
-                field.SetValue(obj, value);
+            {
+                field.SetValue(obj, castFromStr ? FromString(field, value.ToString()) : value);
             }
             catch (ArgumentException e)
             {
                 throw new WrongTypeException("Field '" + fieldName + "' is not of type '" + value.GetType().ToString() + "'!", e);
             }
-}
+        }
 
         /// <summary>
         /// Get a field value from name.
@@ -159,6 +161,44 @@ namespace Mirrors
 
             // return value
             return value;
+        }
+
+        /// <summary>
+        /// Convert string to given field's type.
+        /// </summary>
+        /// <param name="field">Field to convert into.</param>
+        /// <param name="val">String value to convert.</param>
+        public static object FromString(FieldInfo field, string val)
+        {
+            try
+            {
+                var converter = System.ComponentModel.TypeDescriptor.GetConverter(field.FieldType);
+                if (converter == null) throw new MissingConverterException("Field type does not implement IConvertible!");
+                return converter.ConvertFromString(val);
+            }
+            catch (Exception e)
+            {
+                throw new BadStringFormatException("Failed to convert from string!", e);
+            }
+        }
+
+        /// <summary>
+        /// Convert string to given property's type.
+        /// </summary>
+        /// <param name="field">Field to convert into.</param>
+        /// <param name="val">String value to convert.</param>
+        public static object FromString(PropertyInfo field, string val)
+        {
+            try
+            {
+                var converter = System.ComponentModel.TypeDescriptor.GetConverter(field.PropertyType);
+                if (converter == null) throw new MissingConverterException("Field type does not implement IConvertible!");
+                return converter.ConvertFromString(val);
+            }
+            catch (Exception e)
+            {
+                throw new BadStringFormatException("Failed to convert from string!", e);
+            }
         }
     }
 }
