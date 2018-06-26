@@ -3,8 +3,7 @@
  * Author: Ronen Ness.
  * Since: 2018.
  */
-using System;
-using System.Reflection;
+using System.Collections.Generic;
 
 
 namespace Mirrors
@@ -56,6 +55,26 @@ namespace Mirrors
         public static void SetValueFromString(object obj, string fieldName, object value, bool ignoreCase = false)
         {
             SetValue(obj, fieldName, value, ignoreCase, true);
+        }
+
+        /// <summary>
+        /// Get all field and property names of an object.
+        /// </summary>
+        /// <param name="obj">Object to get field and property names.</param>
+        /// <param name="onlyPublic">If true, will only return public properties.</param>
+        /// <returns>List with all field and property names.</returns>
+        public static HashSet<string> Keys(object obj, bool onlyPublic = false)
+        {
+            // get fields
+            HashSet<string> ret = MirrorsEx.GetAllFieldNames(obj, onlyPublic);
+
+            // add properties
+            var props = MirrorsEx.GetAllPropertyNames(obj, onlyPublic);
+            foreach (var prop in props)
+                ret.Add(prop);
+
+            // return result
+            return ret;
         }
 
         /// <summary>

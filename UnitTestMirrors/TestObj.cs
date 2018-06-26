@@ -21,7 +21,6 @@ namespace MirrorsUnitTests
         /// </summary>
         public int int_property_r { get { return 3; } }
 
-
         /// <summary>
         /// Int property with just set.
         /// </summary>
@@ -45,6 +44,6 @@ namespace MirrorsUnitTests
         /// <summary>
         /// Field of type self.
         /// </summary>
-        public TestObj self_field;
+        public TestObj self_field = null;
     }
 }

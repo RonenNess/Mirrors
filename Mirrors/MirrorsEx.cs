@@ -5,6 +5,7 @@
  */
 using System;
 using System.Reflection;
+using System.Collections.Generic;
 
 
 namespace Mirrors
@@ -18,6 +19,60 @@ namespace Mirrors
         /// Default flags to use for instance-related actions.
         /// </summary>
         public static BindingFlags DefaultInstanceFlags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic;
+
+        /// <summary>
+        /// Get all field names from object.
+        /// </summary>
+        /// <param name="obj">Object to get field names from.</param>
+        /// <param name="publicOnly">If true, will only return public fields.</param>
+        /// <returns>Set with all field names.</returns>
+        public static HashSet<string> GetAllFieldNames(object obj, bool publicOnly = false)
+        {
+            // for return value
+            HashSet<string> ret = new HashSet<string>();
+
+            // set flags
+            BindingFlags flags = BindingFlags.Public | BindingFlags.Instance;
+            if (!publicOnly)
+                flags |= BindingFlags.NonPublic;
+
+            // get all fields
+            var fields = obj.GetType().GetFields(flags);
+            foreach (var field in fields)
+            {
+                ret.Add(field.Name);
+            }
+
+            // return result
+            return ret;
+        }
+
+        /// <summary>
+        /// Get all property names from object.
+        /// </summary>
+        /// <param name="obj">Object to get property names from.</param>
+        /// <param name="publicOnly">If true, will only return public properties.</param>
+        /// <returns>Set with all property names.</returns>
+        public static HashSet<string> GetAllPropertyNames(object obj, bool publicOnly = false)
+        {
+            // for return value
+            HashSet<string> ret = new HashSet<string>();
+
+            // set flags
+            BindingFlags flags = BindingFlags.Public | BindingFlags.Instance;
+            if (!publicOnly)
+                flags |= BindingFlags.NonPublic;
+
+            // get all properties
+            var properties = obj.GetType().GetProperties(flags);
+            foreach (var prop in properties)
+            {
+                ret.Add(prop.Name);
+            }
+
+            // return result
+            return ret;
+        }
 
         /// <summary>
         /// Set a property value from name.
