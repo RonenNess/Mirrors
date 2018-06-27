@@ -10,6 +10,41 @@ Or visit [https://www.nuget.org/packages/Mirrors/](https://www.nuget.org/package
 
 # API
 
+## Example:
+
+Lets start with a basic example:
+
+```cs
+// just a testing class..
+class Annie
+{
+	public string Name;
+	public string HitBy;
+	public bool IsOk;
+
+	public void TellUs(string what)
+	{
+	}
+}
+
+static void Main(string[] args)
+{
+	// create annie
+	Annie annie = new Annie();
+	
+	// set some fields
+	Mirrors.Set(annie, "Name", "Annie");
+	Mirrors.Set(annie, "hitby", "A smooth criminal", ignoreCase: true);
+	Mirrors.SetFromString(annie, "IsOk", "false");
+	
+	// get fields
+	bool isOk = Mirrors.Get<bool>(annie, "IsOk");
+	
+	// invoke
+	Mirrors.Invoke(annie, "TellUs", new object[] { "Are you ok?" });
+}
+```
+
 ## Mirrors
 
 `Mirrors` is the main API class with all basic functionality:
