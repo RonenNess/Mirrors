@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+	<id>Mirrors</id>
+	<version>1.0.0.0</version>
+	<authors>Ronen Ness</authors>
+	<owners>RonenNess</owners>
+	<title>Mirrors</title>
+	<summary>A micro-lib with useful reflection utilities.</summary>
+	<licenseUrl>https://en.wikipedia.org/wiki/MIT_License</licenseUrl>
+	<projectUrl>https://github.com/RonenNess/Mirrors</projectUrl>
+	<requireLicenseAcceptance>false</requireLicenseAcceptance>
+	<releaseNotes>First stable version.</releaseNotes>
+	<description>Provide simple reflection API to perform basic actions like setting field from string, getting all class keys, etc.</description>
+	<tags>reflection helper utils</tags>
+	<dependencies>
+	</dependencies>
+  </metadata>
+  <files>
+	<file src="Mirrors\bin\Release\Mirrors.dll" target="lib\mirrors\Mirrors.dll"/>
+  </files>
+</package>

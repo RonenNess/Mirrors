@@ -14,6 +14,11 @@ namespace Mirrors
     public static class Mirrors
     {
         /// <summary>
+        /// Version identifier.
+        /// </summary>
+        public static readonly string Version = "1.0.0.0";
+
+        /// <summary>
         /// Set field / property value by name.
         /// </summary>
         /// <param name="obj">Object to set value to.</param>
