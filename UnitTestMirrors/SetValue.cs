@@ -21,25 +21,25 @@ namespace MirrorsUnitTests
 
             // test setting field
             {
-                Mirrors.Mirrors.SetValue(test, "int_field", 999);
+                Mirrors.Mirrors.Set(test, "int_field", 999);
                 Assert.AreEqual(999, test.int_field);
             }
 
             // test setting property with read / write
             {
-                Mirrors.Mirrors.SetValue(test, "int_property_rw", 999);
+                Mirrors.Mirrors.Set(test, "int_property_rw", 999);
                 Assert.AreEqual(999, test.int_property_rw);
             }
 
             // test setting property with just write
             {
-                Mirrors.Mirrors.SetValue(test, "int_property_w", 999);
+                Mirrors.Mirrors.Set(test, "int_property_w", 999);
                 Assert.AreEqual(999, test.int_property_rw);
             }
 
             // test setting private field
             {
-                Mirrors.Mirrors.SetValue(test, "int_private_field", 999);
+                Mirrors.Mirrors.Set(test, "int_private_field", 999);
                 Assert.AreEqual(999, test.int_private_field__val);
             }
         }
@@ -55,19 +55,19 @@ namespace MirrorsUnitTests
 
             // test setting field
             {
-                Mirrors.Mirrors.SetValue(test, "Int_fielD", 999, true);
+                Mirrors.Mirrors.Set(test, "Int_fielD", 999, true);
                 Assert.AreEqual(999, test.int_field);
             }
 
             // test setting property with read / write
             {
-                Mirrors.Mirrors.SetValue(test, "Int_propertY_rw", 999, true);
+                Mirrors.Mirrors.Set(test, "Int_propertY_rw", 999, true);
                 Assert.AreEqual(999, test.int_property_rw);
             }
 
             // test setting property with just write
             {
-                Mirrors.Mirrors.SetValue(test, "Int_propertY_w", 999, true);
+                Mirrors.Mirrors.Set(test, "Int_propertY_w", 999, true);
                 Assert.AreEqual(999, test.int_property_rw);
             }
         }
@@ -85,7 +85,7 @@ namespace MirrorsUnitTests
             {
                 try
                 {
-                    Mirrors.Mirrors.SetValue(test, "inT_fielD", 123);
+                    Mirrors.Mirrors.Set(test, "inT_fielD", 123);
                     Assert.Fail("Didn't get FieldNotFound exception!");
                 }
                 catch (Mirrors.FieldNotFoundException)
@@ -102,7 +102,7 @@ namespace MirrorsUnitTests
             {
                 try
                 {
-                    Mirrors.Mirrors.SetValue(test, "inT_fielDddd", 123);
+                    Mirrors.Mirrors.Set(test, "inT_fielDddd", 123);
                     Assert.Fail("Didn't get FieldNotFound exception!");
                 }
                 catch (Mirrors.FieldNotFoundException)
@@ -127,7 +127,7 @@ namespace MirrorsUnitTests
 
             // test setting field with wrong type
             {    
-                Mirrors.Mirrors.SetValueFromString(test, "int_field", "123");
+                Mirrors.Mirrors.SetFromString(test, "int_field", "123");
                 Assert.AreEqual(test.int_field, 123);
             }
 
@@ -135,7 +135,7 @@ namespace MirrorsUnitTests
             {
                 try
                 {
-                    Mirrors.Mirrors.SetValueFromString(test, "int_field", "bla");
+                    Mirrors.Mirrors.SetFromString(test, "int_field", "bla");
                     Assert.Fail("Didn't get BadStringFormat exception!");
                 }
                 catch (Mirrors.BadStringFormatException)
@@ -152,7 +152,7 @@ namespace MirrorsUnitTests
             {
                 try
                 {
-                    Mirrors.Mirrors.SetValueFromString(test, "self_field", "bla");
+                    Mirrors.Mirrors.SetFromString(test, "self_field", "bla");
                     Assert.Fail("Didn't get MissingConverter exception!");
                 }
                 catch (Mirrors.BadStringFormatException)
@@ -180,7 +180,7 @@ namespace MirrorsUnitTests
             {
                 try
                 {
-                    Mirrors.Mirrors.SetValue(test, "int_field", "wrong_type!");
+                    Mirrors.Mirrors.Set(test, "int_field", "wrong_type!");
                     Assert.Fail("Didn't get WrongTypeException exception!");
                 }
                 catch (Mirrors.WrongTypeException)
@@ -207,7 +207,7 @@ namespace MirrorsUnitTests
             {
                 try
                 {
-                    Mirrors.Mirrors.SetValue(test, "int_property_r", 123);
+                    Mirrors.Mirrors.Set(test, "int_property_r", 123);
                     Assert.Fail("Didn't get PropertyNotReadableException exception!");
                 }
                 catch (Mirrors.PropertyNotWritableException)

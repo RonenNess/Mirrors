@@ -50,6 +50,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="GetKeys.cs" />
     <Compile Include="SetValue.cs" />
     <Compile Include="GetValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

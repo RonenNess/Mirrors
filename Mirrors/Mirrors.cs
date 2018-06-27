@@ -21,7 +21,7 @@ namespace Mirrors
         /// <param name="value">Value to set.</param>
         /// <param name="ignoreCase">If true, field name will not be case-sensitive.</param>
         /// <param name="fromString">If true, will convert value from string.</param>
-        private static void SetValue(object obj, string fieldName, object value, bool ignoreCase = false, bool fromString = false)
+        public static void Set(object obj, string fieldName, object value, bool ignoreCase = false, bool fromString = false)
         {
             try
             {
@@ -40,41 +40,21 @@ namespace Mirrors
         /// <param name="fieldName">Property / field identifier.</param>
         /// <param name="value">Value to set.</param>
         /// <param name="ignoreCase">If true, field name will not be case-sensitive.</param>
-        public static void SetValue(object obj, string fieldName, object value, bool ignoreCase = false)
+        public static void SetFromString(object obj, string fieldName, object value, bool ignoreCase = false)
         {
-            SetValue(obj, fieldName, value, ignoreCase, false);
-        }
-
-        /// <summary>
-        /// Set field / property value by name.
-        /// </summary>
-        /// <param name="obj">Object to set value to.</param>
-        /// <param name="fieldName">Property / field identifier.</param>
-        /// <param name="value">Value to set.</param>
-        /// <param name="ignoreCase">If true, field name will not be case-sensitive.</param>
-        public static void SetValueFromString(object obj, string fieldName, object value, bool ignoreCase = false)
-        {
-            SetValue(obj, fieldName, value, ignoreCase, true);
+            Set(obj, fieldName, value, ignoreCase, true);
         }
 
         /// <summary>
         /// Get all field and property names of an object.
         /// </summary>
         /// <param name="obj">Object to get field and property names.</param>
-        /// <param name="onlyPublic">If true, will only return public properties.</param>
+        /// <param name="publicOnly">If true, will only return public properties.</param>
+        /// <param name="declaredOnly">If true, will only return keys declared in object itself, and not inherited.</param>
         /// <returns>List with all field and property names.</returns>
-        public static HashSet<string> Keys(object obj, bool onlyPublic = false)
+        public static HashSet<string> Keys(object obj, bool publicOnly = false, bool declaredOnly = false)
         {
-            // get fields
-            HashSet<string> ret = MirrorsEx.GetAllFieldNames(obj, onlyPublic);
-
-            // add properties
-            var props = MirrorsEx.GetAllPropertyNames(obj, onlyPublic);
-            foreach (var prop in props)
-                ret.Add(prop);
-
-            // return result
-            return ret;
+            return MirrorsEx.GetAllMemberNames(obj, publicOnly, declaredOnly);
         }
 
         /// <summary>
@@ -83,7 +63,7 @@ namespace Mirrors
         /// <param name="obj">Object to get value from.</param>
         /// <param name="fieldName">Property / field identifier.</param>
         /// <param name="ignoreCase">If true, field name will not be case-sensitive.</param>
-        public static T GetValue<T>(object obj, string fieldName, bool ignoreCase = false)
+        public static T Get<T>(object obj, string fieldName, bool ignoreCase = false)
         {
             try
             {

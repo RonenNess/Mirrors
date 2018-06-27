@@ -21,25 +21,25 @@ namespace MirrorsUnitTests
 
             // test getting field
             {
-                int gotVal = Mirrors.Mirrors.GetValue<int>(test, "int_field");
+                int gotVal = Mirrors.Mirrors.Get<int>(test, "int_field");
                 Assert.AreEqual(gotVal, test.int_field);
             }
 
             // test getting property with read / write
             {
-                int gotVal = Mirrors.Mirrors.GetValue<int>(test, "int_property_rw");
+                int gotVal = Mirrors.Mirrors.Get<int>(test, "int_property_rw");
                 Assert.AreEqual(gotVal, test.int_property_rw);
             }
 
             // test getting property with just read
             {
-                int gotVal = Mirrors.Mirrors.GetValue<int>(test, "int_property_r");
+                int gotVal = Mirrors.Mirrors.Get<int>(test, "int_property_r");
                 Assert.AreEqual(gotVal, test.int_property_r);
             }
 
             // test getting private field
             {
-                int gotVal = Mirrors.Mirrors.GetValue<int>(test, "int_private_field");
+                int gotVal = Mirrors.Mirrors.Get<int>(test, "int_private_field");
                 Assert.AreEqual(gotVal, test.int_private_field__val);
             }
         }
@@ -55,19 +55,19 @@ namespace MirrorsUnitTests
 
             // test getting field
             {
-                int gotVal = Mirrors.Mirrors.GetValue<int>(test, "inT_fielD", true);
+                int gotVal = Mirrors.Mirrors.Get<int>(test, "inT_fielD", true);
                 Assert.AreEqual(gotVal, test.int_field);
             }
 
             // test getting property with read / write
             {
-                int gotVal = Mirrors.Mirrors.GetValue<int>(test, "inT_propertY_rw", true);
+                int gotVal = Mirrors.Mirrors.Get<int>(test, "inT_propertY_rw", true);
                 Assert.AreEqual(gotVal, test.int_property_rw);
             }
 
             // test getting property with just read
             {
-                int gotVal = Mirrors.Mirrors.GetValue<int>(test, "inT_propertY_r", true);
+                int gotVal = Mirrors.Mirrors.Get<int>(test, "inT_propertY_r", true);
                 Assert.AreEqual(gotVal, test.int_property_r);
             }
         }
@@ -85,7 +85,7 @@ namespace MirrorsUnitTests
             {
                 try
                 {
-                    int gotVal = Mirrors.Mirrors.GetValue<int>(test, "inT_fielD", false);
+                    int gotVal = Mirrors.Mirrors.Get<int>(test, "inT_fielD", false);
                     Assert.Fail("Didn't get FieldNotFound exception!");
                 }
                 catch (Mirrors.FieldNotFoundException)
@@ -102,7 +102,7 @@ namespace MirrorsUnitTests
             {
                 try
                 {
-                    int gotVal = Mirrors.Mirrors.GetValue<int>(test, "inT_fielDddd", true);
+                    int gotVal = Mirrors.Mirrors.Get<int>(test, "inT_fielDddd", true);
                     Assert.Fail("Didn't get FieldNotFound exception!");
                 }
                 catch (Mirrors.FieldNotFoundException)
@@ -129,7 +129,7 @@ namespace MirrorsUnitTests
             {
                 try
                 {
-                    string gotVal = Mirrors.Mirrors.GetValue<string>(test, "int_field", false);
+                    string gotVal = Mirrors.Mirrors.Get<string>(test, "int_field", false);
                     Assert.Fail("Didn't get WrongTypeException exception!");
                 }
                 catch (Mirrors.WrongTypeException)
@@ -156,7 +156,7 @@ namespace MirrorsUnitTests
             {
                 try
                 {
-                    int gotVal = Mirrors.Mirrors.GetValue<int>(test, "int_property_w", false);
+                    int gotVal = Mirrors.Mirrors.Get<int>(test, "int_property_w", false);
                     Assert.Fail("Didn't get PropertyNotReadableException exception!");
                 }
                 catch (Mirrors.PropertyNotReadableException)

@@ -46,4 +46,40 @@ namespace MirrorsUnitTests
         /// </summary>
         public TestObj self_field = null;
     }
+
+    /// <summary>
+    /// Another class for testing.
+    /// </summary>
+    class TestObjForNames
+    {
+        /// <summary>
+        /// Public field.
+        /// </summary>
+        public int pub_field;
+
+        /// <summary>
+        /// Private field.
+        /// </summary>
+        private int prv_field;
+
+        /// <summary>
+        /// Public property.
+        /// </summary>
+        public int pub_prop { get; set; }
+
+        /// <summary>
+        /// Private property.
+        /// </summary>
+        public int prv_prop { get; set; }
+
+        /// <summary>
+        /// Public function.
+        /// </summary>
+        public void pub_func() { }
+
+        /// <summary>
+        /// Private function.
+        /// </summary>
+        public void prv_func() { }
+    }
 }

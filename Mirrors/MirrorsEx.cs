@@ -25,8 +25,9 @@ namespace Mirrors
         /// </summary>
         /// <param name="obj">Object to get field names from.</param>
         /// <param name="publicOnly">If true, will only return public fields.</param>
+        /// <param name="declaredOnly">If true, will only return members declared in the object itself and not inherited.</param>
         /// <returns>Set with all field names.</returns>
-        public static HashSet<string> GetAllFieldNames(object obj, bool publicOnly = false)
+        public static HashSet<string> GetAllFieldNames(object obj, bool publicOnly = false, bool declaredOnly = false)
         {
             // for return value
             HashSet<string> ret = new HashSet<string>();
@@ -35,6 +36,8 @@ namespace Mirrors
             BindingFlags flags = BindingFlags.Public | BindingFlags.Instance;
             if (!publicOnly)
                 flags |= BindingFlags.NonPublic;
+            if (declaredOnly)
+                flags |= BindingFlags.DeclaredOnly;
 
             // get all fields
             var fields = obj.GetType().GetFields(flags);
@@ -52,8 +55,9 @@ namespace Mirrors
         /// </summary>
         /// <param name="obj">Object to get property names from.</param>
         /// <param name="publicOnly">If true, will only return public properties.</param>
+        /// <param name="declaredOnly">If true, will only return members declared in the object itself and not inherited.</param>
         /// <returns>Set with all property names.</returns>
-        public static HashSet<string> GetAllPropertyNames(object obj, bool publicOnly = false)
+        public static HashSet<string> GetAllPropertyNames(object obj, bool publicOnly = false, bool declaredOnly = false)
         {
             // for return value
             HashSet<string> ret = new HashSet<string>();
@@ -62,12 +66,74 @@ namespace Mirrors
             BindingFlags flags = BindingFlags.Public | BindingFlags.Instance;
             if (!publicOnly)
                 flags |= BindingFlags.NonPublic;
+            if (declaredOnly)
+                flags |= BindingFlags.DeclaredOnly;
 
             // get all properties
             var properties = obj.GetType().GetProperties(flags);
             foreach (var prop in properties)
             {
                 ret.Add(prop.Name);
+            }
+
+            // return result
+            return ret;
+        }
+
+        /// <summary>
+        /// Get all function names from object.
+        /// </summary>
+        /// <param name="obj">Object to get function names from.</param>
+        /// <param name="publicOnly">If true, will only return public functions.</param>
+        /// <param name="declaredOnly">If true, will only return members declared in the object itself and not inherited.</param>
+        /// <returns>Set with all function names.</returns>
+        public static HashSet<string> GetAllFunctionNames(object obj, bool publicOnly = false, bool declaredOnly = false)
+        {
+            // for return value
+            HashSet<string> ret = new HashSet<string>();
+
+            // set flags
+            BindingFlags flags = BindingFlags.Public | BindingFlags.Instance;
+            if (!publicOnly)
+                flags |= BindingFlags.NonPublic;
+            if (declaredOnly)
+                flags |= BindingFlags.DeclaredOnly;
+
+            // get all functions
+            var funcs = obj.GetType().GetMethods(flags);
+            foreach (var func in funcs)
+            {
+                ret.Add(func.Name);
+            }
+
+            // return result
+            return ret;
+        }
+
+        /// <summary>
+        /// Get all member names from object.
+        /// </summary>
+        /// <param name="obj">Object to get member names from.</param>
+        /// <param name="publicOnly">If true, will only return public members.</param>
+        /// <param name="declaredOnly">If true, will only return members declared in the object itself and not inherited.</param>
+        /// <returns>Set with all member names.</returns>
+        public static HashSet<string> GetAllMemberNames(object obj, bool publicOnly = false, bool declaredOnly = false)
+        {
+            // for return value
+            HashSet<string> ret = new HashSet<string>();
+
+            // set flags
+            BindingFlags flags = BindingFlags.Public | BindingFlags.Instance;
+            if (!publicOnly)
+                flags |= BindingFlags.NonPublic;
+            if (declaredOnly)
+                flags |= BindingFlags.DeclaredOnly;
+
+            // get all members
+            var members = obj.GetType().GetMembers(flags);
+            foreach (var member in members)
+            {
+                ret.Add(member.Name);
             }
 
             // return result
