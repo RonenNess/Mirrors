@@ -34,7 +34,7 @@ Get all field, property and method names in object.
 
 ## MirrorsEx
 
-`MirrorsEx` provide some extra, more specific functionality. Check out class doc for details.
+`MirrorsEx` provide some extra, more specific functionality. Check out class docs (in code) for more details.
 
 ## Exceptions
 
