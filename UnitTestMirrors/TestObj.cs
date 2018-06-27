@@ -75,7 +75,7 @@ namespace MirrorsUnitTests
         /// <summary>
         /// Public function.
         /// </summary>
-        public void pub_func() { }
+        public int pub_func() { return 5; }
 
         /// <summary>
         /// Private function.
