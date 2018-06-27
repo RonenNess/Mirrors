@@ -2,6 +2,12 @@
 
 Micro C# lib for easier reflection.
 
+# Install
+
+`Install-Package Mirrors`
+
+Or visit [https://www.nuget.org/packages/Mirrors/](https://www.nuget.org/packages/Mirrors/) for more details.
+
 # API
 
 ## Mirrors
