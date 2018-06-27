@@ -24,10 +24,6 @@ Get field / property value by name (similar to Python's getattr).
 
 Return object's classname as string.
 
-#### Mirrors.ClassName(obj)
-
-Return object's classname as string.
-
 #### Mirrors.Invoke(obj, funcName, [optionalParams], [_this])
 
 Invoke a method by name.
