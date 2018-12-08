@@ -73,6 +73,10 @@ Invoke a method by name.
 
 Get all field, property and method names in object.
 
+#### Mirrors.ParseEnum<type>(str)
+
+Parse enum value from string.
+
 ## MirrorsEx
 
 `MirrorsEx` provide some extra, more specific functionality. Check out class docs (in code) for more details.

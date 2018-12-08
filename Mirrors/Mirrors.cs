@@ -88,6 +88,17 @@ namespace Mirrors
         }
 
         /// <summary>
+        /// Parse enum from string.
+        /// </summary>
+        /// <typeparam name="T">Enum type.</typeparam>
+        /// <param name="val">Value to parse.</param>
+        /// <returns>Enum value, throw exception if failed to parse.</returns>
+        public static T ParseEnum<T>(string val)
+        {
+            return (T)System.Enum.Parse(typeof(T), val);
+        }
+
+        /// <summary>
         /// Get field / property value by name.
         /// </summary>
         /// <param name="obj">Object to get value from.</param>

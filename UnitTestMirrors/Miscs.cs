@@ -4,6 +4,13 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MirrorsUnitTests
 {
+    /// <summary>
+    /// Test enum.
+    /// </summary>
+    enum TestEnum
+    {
+        Val1
+    }
 
     /// <summary>
     /// Test misc stuff
@@ -29,6 +36,16 @@ namespace MirrorsUnitTests
         {
             TestObjForNames test = new TestObjForNames();
             Assert.AreEqual(Mirrors.Mirrors.Invoke(test, "pub_func"), test.pub_func());
+        }
+
+        /// <summary>
+        /// Make sure parse enum works.
+        /// </summary>
+        [TestMethod]
+        public void TestParseEnum()
+        {
+            TestObjForNames test = new TestObjForNames();
+            Assert.AreEqual(Mirrors.Mirrors.ParseEnum<TestEnum>("Val1"), TestEnum.Val1);
         }
     }
 }
